@@ -1,10 +1,10 @@
 output "vpc_id" {
-  value       = aws_vpc.vpc.id
+  value       = aws_vpc.default.id
   description = "The ID of the VPC"
 }
 
 output "vpc_cidr_block" {
-  value       = aws_vpc.vpc.cidr_block
+  value       = aws_vpc.default.cidr_block
   description = "The CIDR block of the VPC"
 }
 
@@ -59,4 +59,9 @@ output "additional_cidr_blocks_to_association_ids" {
     i.cidr_block => i.id
     if local.additional_cidr_blocks_defined
   }
+}
+
+output "zone_id" {
+  value       = aws_route53_zone.default.id
+  description = "The ID of the Hostzone"
 }

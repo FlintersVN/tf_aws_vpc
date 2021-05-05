@@ -61,3 +61,9 @@ variable "additional_cidr_blocks" {
   description = "A list of additional IPv4 CIDR blocks to associate with the VPC"
   default     = null
 }
+
+variable "enable_route53_zone" {
+  type        = bool
+  description = "A boolean flag to enable/disable route53 hostzone creation"
+  default     = true
+}
