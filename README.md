@@ -1,5 +1,23 @@
 # tf_aws_vpc
 
+Terraform module for creating VPC
+
+- Enable/disable internet gateway creation
+- Enable/disable route 53 private zone creation
+
+## Usage
+
+```
+module "infra_vpc" {
+  source = "git::https://github.com/FlintersVN/tf_aws_vpc.git?ref=v0.0.1"
+
+  vpc_name                         = "test.vpc"
+  cidr_block                       = "10.100.0.0/16"
+  assign_generated_ipv6_cidr_block = true
+  additional_cidr_blocks           = ["10.99.0.0/16"]
+}
+```
+
 ## Requirements
 
 | Name                                                                     | Version |

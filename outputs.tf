@@ -1,15 +1,15 @@
 output "vpc_id" {
-  value       = aws_vpc.default.id
+  value       = join("", aws_vpc.default.*.id)
   description = "The ID of the VPC"
 }
 
 output "vpc_cidr_block" {
-  value       = aws_vpc.default.cidr_block
+  value       = join("", aws_vpc.default.*.cidr_block)
   description = "The CIDR block of the VPC"
 }
 
 output "gateway_id" {
-  value       = aws_internet_gateway.default.id
+  value       = join("", aws_internet_gateway.default.*.id)
   description = "The ID of the Internet Gateway"
 }
 
@@ -62,6 +62,6 @@ output "additional_cidr_blocks_to_association_ids" {
 }
 
 output "zone_id" {
-  value       = aws_route53_zone.default.id
+  value       = join("", aws_route53_zone.default.*.zone_id)
   description = "The ID of the Hostzone"
 }

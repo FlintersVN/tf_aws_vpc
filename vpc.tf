@@ -2,7 +2,7 @@
 # This module creates all resources necessary for a VPC
 #--------------------------------------------------------------
 
-local {
+locals {
   additional_cidr_blocks_defined = var.additional_cidr_blocks != null ? true : false
   additional_cidr_blocks         = local.additional_cidr_blocks_defined ? var.additional_cidr_blocks : []
 }
@@ -27,7 +27,7 @@ resource "aws_vpc" "default" {
 
 resource "aws_internet_gateway" "default" {
   count  = var.enable_internet_gateway ? 1 : 0
-  vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.default.id
   tags = merge(
     {
       "Name" = var.vpc_name
@@ -44,7 +44,7 @@ resource "aws_vpc_ipv4_cidr_block_association" "default" {
 
 resource "aws_route53_zone" "default" {
   count   = var.enable_route53_zone ? 1 : 0
-  name    = "${var.vpc_name}.vpc"
+  name    = var.vpc_name
   comment = "Managed by Terraform"
 
   vpc {
@@ -53,7 +53,7 @@ resource "aws_route53_zone" "default" {
 
   tags = merge(
     {
-      "Name" = "${var.vpc_name}.vpc"
+      "Name" = var.vpc_name,
     },
     var.vpc_tags,
   )
